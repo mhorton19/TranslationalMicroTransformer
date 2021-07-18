@@ -442,6 +442,14 @@ if __name__ == '__main__':
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(net.parameters(), amsgrad=True)
 
+    losses = []
+    val_losses = []
+    accs = []
+    val_accs = []
+    epochs = []
+    val_epochs = []
+
+
     print_increment = 100
     for epoch in range(300):  # loop over the dataset multiple times
         running_loss = 0.0
@@ -470,6 +478,15 @@ if __name__ == '__main__':
             if i % print_increment == print_increment-1:    # print every 2000 mini-batches
                 print('[%d, %5d] loss: %.5f accuracy %.5f' %
                       (epoch + 1, i + 1, running_loss / print_increment, running_accuracy/print_increment))
+
+                losses.append(running_loss / print_increment)
+                accs.append(running_accuracy/print_increment)
+                epochs.append(epoch)
+
+                np.save('loss.npy', np.array(losses))
+                np.save('acc.npy', np.array(accs))
+                np.save('epochs.npy', np.array(epochs))
+
                 running_loss = 0.0
                 running_accuracy = 0.0
 
@@ -481,7 +498,13 @@ if __name__ == '__main__':
         print('EPOCH %d VAL loss: %.5f accuracy %.5f' %
                       (epoch + 1, loss, acc))
 
+        val_losses.append(loss)
+        val_accs.append(acc)
+        val_epochs.append(epoch)
 
+        np.save('val_loss.npy', np.array(val_losses))
+        np.save('val_acc.npy', np.array(val_acc))
+        np.save('val_epochs.npy', np.array(val_epochs))
 
         
 
