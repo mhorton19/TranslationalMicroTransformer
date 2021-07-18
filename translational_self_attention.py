@@ -503,7 +503,7 @@ if __name__ == '__main__':
         val_epochs.append(epoch)
 
         np.save('val_loss.npy', np.array(val_losses))
-        np.save('val_acc.npy', np.array(val_acc))
+        np.save('val_acc.npy', np.array(val_accs))
         np.save('val_epochs.npy', np.array(val_epochs))
 
         
