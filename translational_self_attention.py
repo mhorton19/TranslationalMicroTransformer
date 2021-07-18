@@ -37,7 +37,7 @@ def validation(model, testloader, criterion):
 
 if __name__ == '__main__':
     device = torch.device("cuda:0")
-    bs = 16
+    bs = 32
     #torch.multiprocessing.freeze_support()
     aug_transform = transforms.Compose(
         [transforms.RandomHorizontalFlip(),
